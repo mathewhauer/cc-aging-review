@@ -65,7 +65,8 @@ pkgs <- c(
   "philentropy",
   "ggridges",
   "janitor",
-  "gghighlight"
+  "gghighlight",
+  "vroom"
   
 )
 

@@ -30,7 +30,7 @@ recs_search_4peryear <- documents_4pyearandAgingterms[which(documents_4pyearandA
 
 recs_search_4peryear <- cbind(recs_search_4peryear,  sample(c("Matt", "Kyle"), nrow(recs_search_4peryear), replace=TRUE, prob=c(0.5,0.5)))
 
-write_excel_csv(recs_search_4peryear, "./R/DATA-RAW/papers.xls")
+# write_excel_csv(recs_search_4peryear, "./R/DATA-RAW/papers.xls")
 
 ### Next step is reviewing the papers in recs_search_4peryear and putting notes in the excel file.
 

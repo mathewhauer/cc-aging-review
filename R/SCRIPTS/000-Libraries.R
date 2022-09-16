@@ -66,7 +66,11 @@ pkgs <- c(
   "ggridges",
   "janitor",
   "gghighlight",
-  "vroom"
+  "vroom",
+  "Gmisc",
+  "glue",
+  "htmlTable"
+
   
 )
 

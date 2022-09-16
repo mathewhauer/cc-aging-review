@@ -1,0 +1,59 @@
+---
+title: |
+  Climate Change and Aging: A systematic Review
+
+# to produce blinded version set to 1
+blinded: 0
+
+authors: 
+- name: Mathew E. Hauer
+  thanks: The authors gratefully acknowledge ...
+  affiliation: Department of Sociology, Florida State University
+  
+- name: Kyle Rose
+  affiliation: Department of Sociology, Florida State UniversityW
+
+keywords:
+- 3 to 6 keywords
+- that do not appear in the title
+
+abstract: |
+ In this systematic review, we analyze the literature through Web of Science’s SCI-Expanded and SSCI containing the words “aging” or “aged” and “climate change” and receiving at least four citations per year since publication (n = 481 articles). After discarding irrelevant articles (ie, “aging infrastructure”), the 139 remaining articles overwhelmingly (86%) fall into two categories: temperature/mortality (n=97; 69%) and temperature/morbidity (n = 23; 17%). However, many other important climate topics related to aging remain underdeveloped. Notably, adaptation (n = 8; 6%), vulnerability (n = 5; 4%), emissions/mitigation (n = 4; 3%), drought and mortality (n = 1; 0.7%), food security (n = 1; 0.7%), and climate perceptions (n = 0) remain understudied. Furthermore, more than half of the studies were conducted in the United States (n = 30), China (n = 23), Globally (n = 16), and Australia (n = 9), suggesting a paucity of information in the Global South (n = 11) where climate impacts will be greatest. There were more studies specifically on Spain (n = 5) than specifically on the entire African continent (n = 4). Finally, 18 articles (13%) offered projections in some form, most to the middle of the century. Gerontologists and aging scientists should look beyond the relationship between heat and mortality to offer a more holistic view of aging and climate change. [Sentence about Geography]. Prospective analyses, as opposed to retrospective, could shed additional light on the link between aging and climate change.
+
+bibliography: bibliography.bib
+output: rticles::asa_article
+---
+
+```{r load, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+read_chunk('../R/SCRIPTS/000-libraries.R')
+read_chunk('../R/SCRIPTS/101-DocumentWorkFlow.R')
+read_chunk('../R/SCRIPTS/201-TextNumbers.R')
+
+```
+
+```{r libraries, include = FALSE}
+```
+
+```{r textnumbers, include=FALSE}
+```
+
+
+# Introduction
+
+# Methods and Materials
+
+We use a systematic literature review to assess the literature on climate change and aging.
+
+## Document selection
+We used a keyword search on Clarviate’s Web of Science-expanded search engine using the Boolean operator “TS=(aging OR aged OR elderly) AND TS=(“climate change”).” We selected Web of Science due to its comprehensive scientific coverage of peer-reviewed literature. We conducted the search on September 7, 2022. This search retrieved an initial universe of `r txtInt(num_articles_all)` articles. We filtered these results to include articles of relatively high impact, defined subjectively as those articles with at least four citations per year (n = `r txtInt(num_articles_4cites)`). To further isolate those articles pertaining to aging and climate change, we further restricted our search to those articles containing the words (aging or aged or elderly) in the abstract (n = `r txtInt(num_articles_terms)`). 
+
+We then reviewed these articles for relevance, discarding articles concerning “aging infrastructure” or “aging forests” to isolate articles on human aging and climate change. This yielded a total of `r txtInt(num_articles_reviewed)` articles included in this systematic review (**\autoref{fig-diagram}**).
+
+```{r figureflowdiagram, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("PRISMA Flow Diagram. \\label{fig-diagram}")}
+```
+
+
+# Data Availability
+The underlying computer code and data that support the findings of this study are available in the Supplementary Material and have been deposited in Zenodo (DOI). 

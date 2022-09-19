@@ -7,8 +7,6 @@
 \usepackage{textcomp}
 \usepackage[hyphens]{url} % not crucial - just used below for the URL
 \usepackage{hyperref}
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 %\pdfminorversion=4
 % NOTE: To produce blinded version, replace "0" with "1" below.
@@ -25,7 +23,11 @@
 
 
 
-% Pandoc citation processing
+% tightlist command for lists without linebreak
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -136,8 +138,9 @@ we further restricted our search to those articles containing the words
 
 We then reviewed these articles for relevance, discarding articles
 concerning ``aging infrastructure'' or ``aging forests'' to isolate
-articles on human aging and climate change. This yielded a total of 155
-included in this systematic review (\textbf{\autoref{fig-diagram}}).
+articles on human aging and climate change. This yielded a total of 181
+articles included in this systematic review
+(\textbf{\autoref{fig-diagram}}).
 
 \begin{figure}
 \centering
@@ -145,7 +148,15 @@ included in this systematic review (\textbf{\autoref{fig-diagram}}).
 \caption{PRISMA Flow Diagram. \label{fig-diagram}}
 \end{figure}
 
+\hypertarget{data-availability}{%
+\section{Data Availability}\label{data-availability}}
+
+The underlying computer code and data that support the findings of this
+study are available in the Supplementary Material and have been
+deposited in Zenodo (DOI).
+
 \bibliographystyle{agsm}
 \bibliography{bibliography.bib}
+
 
 \end{document}

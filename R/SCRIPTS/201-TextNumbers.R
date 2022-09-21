@@ -9,8 +9,7 @@ recs_search <- vroom(list.files("../R/DATA-RAW/Clarvariate", full.names = T)) %>
 
 ## At least 4 citations per year and contains a DOI
 documents_4peryear <- recs_search %>%
-  filter(CitesPerYear >=4,
-         !is.na(DI))
+  filter(CitesPerYear >=4)
 
 ## Abstract contains certain key words
 documents_4pyearandAgingterms <- documents_4peryear %>%

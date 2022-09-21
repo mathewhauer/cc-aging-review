@@ -15,8 +15,8 @@ recs_search <- vroom(list.files("../R/DATA-RAW/Clarvariate", full.names = T)) %>
 
 ## At least 4 citations per year and contains a DOI
 documents_4peryear <- recs_search %>%
-  filter(CitesPerYear >=4,
-         !is.na(DI))
+  filter(CitesPerYear >=4) #,
+        # !is.na(DI))
 
 ## Documents review
 documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
@@ -33,7 +33,7 @@ articles_total <- boxGrob(glue("Articles identified through \nWeb of Science",
                                pop = txtInt(nrow(recs_search)),
                                .sep = "\n"),
                           txt_gp = gpar(fontsize = fontsizes))
-articles_4peryear <- boxGrob(glue("Articles with at least 4 cites/year \nand a DOI",
+articles_4peryear <- boxGrob(glue("Articles with at least 4 cites/year",
                                   "n = {pop}",
                                   pop = txtInt(nrow(documents_4peryear)),
                                   .sep = "\n"),

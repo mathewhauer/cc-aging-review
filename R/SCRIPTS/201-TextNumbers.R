@@ -24,7 +24,7 @@ documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
 # Total number of articles
 num_articles_all <- nrow(recs_search)
 
-# Total number of articles with 4 cites per year AND a DOI
+# Total number of articles with 4 cites per year
 num_articles_4cites <- nrow(documents_4peryear)
 
 # Total number of articles with aging terms in their abstract

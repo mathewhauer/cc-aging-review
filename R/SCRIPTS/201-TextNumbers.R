@@ -19,6 +19,8 @@ documents_4pyearandAgingterms <- documents_4peryear %>%
 documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
   filter(Summary != "N/A")
 
+## Categorized & Separated climate effects & impacts
+effect_impact <- read.xlsx("../R/DATA-RAW/categorized effects impacts.xlsx")
 
 
 # Total number of articles
@@ -33,3 +35,20 @@ num_articles_terms <- nrow(documents_4pyearandAgingterms)
 # Total number of articles in our review
 num_articles_reviewed <- nrow(documents_reviewed)
 
+# Number of articles about temperature and mortality
+num_temp_mort <- nrow(effect_impact[effect_impact$Collapsed.Effect == "Temperature" & effect_impact$Collapsed.Impact == "Mortality",])
+
+# Number of articles about temperature and morbidity
+num_temp_morb <- nrow(effect_impact[effect_impact$Collapsed.Effect == "Temperature" & effect_impact$Collapsed.Impact == "Morbidity",])
+
+# Number of articles about US
+num_US <- nrow(documents_reviewed[c(grep("US", documents_reviewed$Area), grep("United States", documents_reviewed$Area)),])
+
+# Number of articles about China
+num_china <- nrow(documents_reviewed[grep("China", documents_reviewed$Area),])
+
+# Number of articles about globe
+num_global <- nrow(documents_reviewed[grep("Global", documents_reviewed$Area),])
+
+# Number of articles about Australia
+num_aus <- nrow(documents_reviewed[grep("Australia", documents_reviewed$Area),])

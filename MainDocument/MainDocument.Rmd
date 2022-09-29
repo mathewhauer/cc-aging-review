@@ -27,6 +27,8 @@ library(knitr)
 read_chunk('../R/SCRIPTS/000-libraries.R')
 read_chunk('../R/SCRIPTS/101-DocumentWorkFlow.R')
 read_chunk('../R/SCRIPTS/201-TextNumbers.R')
+read_chunk('../R/SCRIPTS/102-HeatMapCrossTab.R')
+read_chunk('../R/SCRIPTS/103-Map.R')
 
 ```
 
@@ -74,6 +76,27 @@ Following our document selection and screening, `r txtInt(num_articles_terms)` a
 
 All (n = `r txtInt(num_articles_all)`) articles were retained for validation. All data were entered into an Excel spreadsheet. We used R to analyze the data and to produce descriptive statistics and visualizations.
 
-
 # Data Availability
 The underlying computer code and data that support the findings of this study are available in the Supplementary Material and have been deposited in Zenodo (DOI). 
+
+# Results
+
+## Table: Key Points (Matt)
+
+## Figure: Heat Map of Topics and Bar Chart (Kyle)
+
+```{r heatmapcrosstab, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("Heatmap of Common Characteristics. \\label{fig-heatmap}")}
+```
+
+## Figure: Timeline of Papers and Citations (Matt)
+
+## Figure: Social Network (Kyle)
+
+## Figure: Map of the Literature (Matt)
+```{r mapandtimelines, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("Map of study location frequency. \\label{fig-map}")}
+```
+
+
+# Conclusion
+
+# Discussion

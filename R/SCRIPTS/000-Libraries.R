@@ -69,7 +69,10 @@ pkgs <- c(
   "vroom",
   "Gmisc",
   "glue",
-  "htmlTable"
+  "htmlTable",
+  "patchwork",
+  "maptools",
+  "scholar"
 
   
 )

@@ -96,3 +96,7 @@ registerDoParallel(clusters) # Register Cluster
 getDoParWorkers() # Determine Number of Utilized Clusters
 getDoParName() #  Name of the Currently Registered Parallel Computing Backend
 getDoParVersion() #  Version of the Currently Registered Parallel Computing Backend
+
+write.excel <- function(x,row.names=FALSE,col.names=TRUE,...) {
+  write.table(x,"clipboard",sep="\t",row.names=row.names,col.names=col.names,...)
+}

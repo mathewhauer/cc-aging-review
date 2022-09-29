@@ -2,7 +2,7 @@
 ## @knitr heatmapcrosstab
 
 ## Importing working sample of reviewed articles
-documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
+documents_reviewed <- read.xlsx("./R/DATA-RAW/papers2.xlsx") %>%
   filter(Summary != "N/A")
 
 ## Creating vectors of climate effect categories
@@ -87,6 +87,6 @@ colnames(heatmap_df) <- c("Climate Effect", "Climate Impact", "Freq")
 ## Creating HeatMap Crosstab
 ggplot(heatmap_df,aes(x=`Climate Effect`,y=`Climate Impact`)) +
   geom_tile(aes(fill=Freq)) +
-  scale_fill_gradient(low = "grey", high = "steelblue") +
+  scale_fill_gradient(low = "grey", high = "steelblue", limits = c(1,100), na.value = "white") +
   geom_text(aes(label=Freq)) +
   theme(axis.text.x = element_text(angle = 35,  hjust=1))

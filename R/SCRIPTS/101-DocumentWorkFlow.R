@@ -18,7 +18,7 @@ documents_4peryear <- recs_search %>%
   filter(CitesPerYear >=4)
 
 ## Documents review
-documents_reviewed <- read.xlsx("./R/DATA-RAW/papers2.xlsx") %>%
+documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
   filter(Summary != "N/A")
 
 

@@ -2,7 +2,7 @@
 ## @knitr heatmapcrosstab
 
 ## Importing working sample of reviewed articles
-documents_reviewed <- read.xlsx("./R/DATA-RAW/papers2.xlsx") %>%
+documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
   filter(Summary != "N/A")
 
 ## Creating vectors of climate effect categories

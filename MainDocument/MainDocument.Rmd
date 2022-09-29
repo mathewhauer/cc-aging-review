@@ -44,13 +44,15 @@ abstract:  'In this systematic review, we analyze the literature through Web of 
 
 Two  seemingly immutable trends will crash head-on during this century: the global populace will continue to age and global climate change impacts will worsen as the century progresses. By the end of the century, when climate change impacts will be considerably more intense than today, the Global populace exposed to these impacts will be decidedly older, amplifying climate change impacts. Many of the anticipated impacts from climate change disproportionately impact the elderly versus younger, more vigorous age groups making these two trends particularly potent when taken together.
 
-Para: Focuses on Climate Change
+Consider  this: the Global populace will age universally. The global population aged 75+ is expected to grow from 271M people today to nearly 1.4B people by 2100 [@division_wpp2017]. Today, only Japan, Italy, and Germany have median ages in excess of 50. But by 2100, 54% of countries will be as old as or older than these countries are today. These demographic trends are well known [@lutz2008coming; @beard2016world].
 
-Para: Focuses on Aging processes
+While  the global, dramatic aging shift occurs, the world will continue to warm. Climate projections suggest global temperatures are likely increase more than 3 degrees Celsius by 2100 compared to the pre-industrial period [@arias2021climate]. These temperature increases will likely usher in increasingly frequent and destructive extreme weather events, more frequent droughts and wildfire risks, extreme heat, and substantially increase the burden on health services [@portner2022climate]. Low-lying coastal areas will experience increased coastal flooding and the submergence of many coastal cities appears likely [@kulp2019new]. Climate change will make the world of 2100 considerably more precarious compared to today, a precarity amplified by a globally aging populace.
 
-Para: Gap bringing together (Climate Change and Aging)
+Nearly every climate impact is heightened by age due to the older people's social vulnerability and physiological susceptibility. Older adults have increased social vulnerability to psychological stresses due to environmental change, reduced ability to adapt, limited transportation, reduced mobility, smaller social networks, lower incomes, chronic health problems, social isolation, cognitive decline, and general fragility [@kovats2008heat]. This elevated social vulnerability combines with older adultâ€™s increased physiological vulnerability to extreme heat and cold, extreme weather events, and infectious diseases to create a biophysical cocktail of potential catastrophe. 
 
-Para: Research Questions with brief methods
+Additionally, climate change and aging intersect in multiple ways, beyond just climate impacts. Older adults play important roles in the mitigation or reduction of carbon emissions [@oneill_global_2010; @buchs_who_2013]. Adaptation to climate impacts greatly vary among older populations [@huang_is_2011;@guo_high_2012] and perceptions of climate risks can serve as barriers to effective adaptation [@hansen_perceptions_2011;@abrahamson_perceptions_2008]. Yet, as we show in this article, most research concerning aging and climate change tends to focus on the impact of extreme temperatures on older populations. A more holistic view of the aging and climate change literature could shed light on the varied relationships between older adults and global environmental change.
+
+In this article, we conduct a systematic review of the literature surrounding climate change and aging. 
 
 
 # Methods and Materials
@@ -64,6 +66,13 @@ We then reviewed these articles for relevance, discarding articles concerning â€
 
 ```{r figureflowdiagram, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("PRISMA Flow Diagram. \\label{fig-diagram}")}
 ```
+
+## Document review
+Following our document selection and screening, `r txtInt(num_articles_terms)` articles were retained for full review. We developed a questionnaire to survey these articles to document and characterize the primary topics of climate change. We developed this questionnaire to standardize the analysis, produce descriptive statistics, and examine trends. We coded all papers based on (1) the primary and (2) secondary climate effect studied, (3) the climate impact type (sensitivity, vulnerability, or exposure), (4) the climate impact studied (morbidity, mortality, etc.), if the article concerned (5) mitigation, (6) adaptation, (7) or perceptions, if the article included a projection (8), the historic time period (9), and the general area the study was conducted (10). Additionally, we gathered general information on authorship, publication year, and citation counts. We conducted an extensive full-text review of all (n = `r txtInt(num_articles_terms)`) articles using this questionnaire. We assessed the primary finding in articles where multiple climate impact types or climate impacts were studied. 
+
+## Analysis
+
+All (n = `r txtInt(num_articles_all)`) articles were retained for validation. All data were entered into an Excel spreadsheet. We used R to analyze the data and to produce descriptive statistics and visualizations.
 
 
 # Data Availability

@@ -52,3 +52,21 @@ num_global <- nrow(documents_reviewed[grep("Global", documents_reviewed$Area),])
 
 # Number of articles about Australia
 num_aus <- nrow(documents_reviewed[grep("Australia", documents_reviewed$Area),])
+
+# Number of articles about mortality
+num_mort <- nrow(effect_impact[effect_impact$Collapsed.Impact == "Mortality",])
+
+# Number of articles about temperature
+num_temp <- nrow(effect_impact[effect_impact$Collapsed.Effect == "Temperature",])
+
+# Number of articles about morbidity
+num_morb <- nrow(effect_impact[effect_impact$Collapsed.Impact == "Morbidity",])
+
+# Number of articles about pollution
+num_pollution <- nrow(effect_impact[effect_impact$Collapsed.Effect == "Pollution",])
+
+# Number of articles about Drought, SLR, or Extreme Weather
+num_D_EW_SLR <- nrow(effect_impact[effect_impact$Collapsed.Effect == "SLR & Flooding" | effect_impact$Collapsed.Effect == "Extreme Weather" | effect_impact$Collapsed.Effect == "Drought",])
+
+# Number of articles about human behavior
+num_behave <- nrow(effect_impact[effect_impact$Collapsed.Impact == "Migration" | effect_impact$Collapsed.Impact == "Economy" | effect_impact$Collapsed.Impact == "Climate Behaviors & Policy",])

@@ -84,7 +84,17 @@ The underlying computer code and data that support the findings of this study ar
 ## Table: Key Points (Matt)
 
 ## Figure: Heat Map of Topics and Bar Chart (Kyle)
+Figure 2 illustrates the co-occurrences of climate effects and impacts. The overwhelming majority of articles in our sample concerned temperature as a climate effect (n = `r paste(num_temp)`). Some examples of climate effects which were classified as temperature include heat (n = 32), heatwaves (n = 16), daily temperature range (n = 9) and ambient temperature (n = 6).
 
+The large majority of articles in our sample concerned the climate impact on mortality (n =`r paste(num_mort)`) and morbidity (n = `r paste(num_morb)`). The morbidity category included articles which specifically observe "morbidity" (n = 18), hospital admissions (n = 9) and ambulance attendance (n = 1), among others. 
+
+More than half of the articles in our sample which included climate effects were specifically about the impact of temperature on mortality (n = 67). The second most frequent climate effect and impact to be studied together was temperature and morbidity (n = 24). Our findings suggest that the most popular climate change features studied in relation to aging populations are temperature effects like heat index and temperature variability on morbidity and mortality metrics like hospital attendance or years of life lost.
+
+There is also a small section of literature which concerns the effect of pollution on aging populations. (n = `r paste(num_pollution)`. Most of these, like temperature, concerned pollution's impact on either mortality (n = 10) or morbidity (n = 3).
+
+There is a paucity of information on how droughts, extreme weather and sea-level rise will be impacting aging human populations. Cumulatively, `r paste(num_D_EW_SLR)` articles observed any of these effects of climate change.
+
+Importantly, very few articles observe the relationships between these climate effects and human behaviors, such as migration, economic activity and climate behaviors & policies (n = `r paste(num_behave)`). This gap is particularly pressing because it speaks to aging populations' abilities to respond to climate change. It is conceivable that aging populations may respond to sea-level rise with migration, urban heat islands with outdoor green spaces, extreme weather events with improved household infrastructure, or seasonal temperature variation with voting behavior. All of these examples demonstrate how climate effects can impact human behavior and consequently adaptive capacity, and all remain understudied.
 ```{r heatmapcrosstab, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("Heatmap of Common Characteristics. \\label{fig-heatmap}")}
 ```
 

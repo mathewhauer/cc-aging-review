@@ -2,7 +2,7 @@
 ## @knitr mapandtimelines
 
 ## Importing working sample of reviewed articles
-documents_reviewed <- read.xlsx("./R/DATA-RAW/papers2.xlsx") %>%
+documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
   filter(Summary != "N/A")
 
 py <- documents_reviewed %>%

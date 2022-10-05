@@ -9,7 +9,7 @@ documents_split <- documents_split[,c(30,31)]
 heatmap_df <- as.data.frame(table(documents_split$Collapsed.Effect, documents_split$Collapsed.Impact))
 colnames(heatmap_df) <- c("Climate Effect", "Climate Impact", "Freq")
 heatmap_df <- heatmap_df %>%
-  filter(`Climate Effect` != "None") %>%
+  filter(`Climate Effect` != "None") %>% # CONSIDER RECODING NONES TO BROAD "CLIMATE CHANGE" CATEGORY
   mutate(textlabel = paste0(Freq, " (",
     percent(Freq/sum(Freq), accuracy = 0.1),
     ")"))

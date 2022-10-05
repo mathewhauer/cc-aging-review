@@ -3,6 +3,8 @@
 
 #install.packages("newtork")
 #library(network)
+library(tidygraph)
+library(ggraph)
 
 ## Categorized & Separated climate effects & impacts
 effect_impact <- read.xlsx("../R/DATA-RAW/categorized effects impacts.xlsx")
@@ -31,7 +33,7 @@ edges <- cooccurence %>%
 
 edges <- edges[,c(4,5,3)]
 
-routes_network <- network(edges, vertex.attr = nodes, matrix.type = "edgelist", ignore.eval = FALSE)
+#routes_network <- network(edges, vertex.attr = nodes, matrix.type = "edgelist", ignore.eval = FALSE)
 
 routes_tidy <- tbl_graph(nodes = nodes, edges = edges, directed = TRUE)
 

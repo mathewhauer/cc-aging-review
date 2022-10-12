@@ -50,27 +50,95 @@ for(this.article in 1:nrow(reviewed_articles_meta)){
   }
     cited_ids <- vector()
 }
-edges <- data.frame(t(sapply(from_to,c)))
-edges <- as.data.frame(t(edges)) 
-edges$V1 <- gsub("NA,", "", edges$V1)
-edges$V1 <- gsub("NA", "", edges$V1)
-edges$from <- rownames(edges)
-edges$from <- gsub("X","",edges$from)
-edges <- edges[,c(2,1)]
-colnames(edges) <- c("from", "to")
-edges <- edges %>% 
-  separate_rows(to, sep = ",")
-edges <- edges[edges$to != "",]
-edges <- edges %>% 
-  mutate(from = as.numeric(edges$from),
-         to = as.numeric(edges$to))
 
-routes_tidy <- tbl_graph(nodes = nodes, edges = edges, directed = TRUE)
+## Turning the nodes data into Tidy Data. Slightly recoding the Climate Effects to reduce them to 6 categories
+nodesinfo <- nodes %>%
+  left_join(., documents_reviewed, by = c("label" = "DI")) %>%
+  mutate(origin = as.numeric(id)) %>%
+  dplyr::select(origin, everything()) %>%
+  mutate(Climate.Effect = factor(case_when(
+    Climate.Effect %in% c("SLR", "Flooding") ~ "SLR & Flooding",
+    Climate.Effect %in% c("Temperature", "temperature") ~ "Temperature",
+    Climate.Effect %in% c("wildfires", "drought") ~ "Wildfires & Drought",
+    TRUE ~ Climate.Effect
+  ),
+  levels = c("Temperature", "None", "pollution", "SLR & Flooding", "Wildfires & Drought", "extreme weather events"))) %>%
+  separate(AU, into = "First", sep = ",") %>%
+  mutate(labels = paste(First, "et al,", PY)) %>%
+  dplyr::select(labels, everything())
 
-ggraph(routes_tidy, layout = "circlepack") + 
-  geom_node_point() +
-  geom_edge_link(alpha = 0.8) + 
-  scale_edge_width(range = c(0.2, 2)) +
-  theme_graph()
+## Turning the edge data into Tidy Data.
+a<- 
+  data.frame(matrix(unlist(from_to), nrow=length(from_to), byrow=TRUE)) %>%
+  rename(destinations =`matrix.unlist.from_to...nrow...length.from_to...byrow...TRUE.`) %>%
+  mutate(origin = row_number()) %>%
+  separate_rows(destinations, sep=",") %>%
+  # mutate(destinations = ifelse(is.na(destinations),0, destinations)) %>%
+  count(origin, destinations) %>%
+  spread(destinations, n, fill = 0) %>%
+  select(-2) %>% as.data.frame() %>%
+  pivot_longer(cols = 2:106,
+               names_to = "destination",
+               values_to = "connection") %>%
+  mutate(destination = as.numeric(destination)) %>%
+  filter(connection >0) %>%
+  na.omit() %>%
+  dplyr::select(-connection) 
 
+# Generating the Top 5 Destinations ie the Most Central papers
+b <- a %>%
+  group_by(destination) %>%
+  dplyr::summarise(count = n()) %>%
+  rename(origin = destination) %>%
+  top_n(5, count) %>%
+  left_join(., nodesinfo) %>%
+  dplyr::select(origin, AU, PY, count) %>%
+  separate(AU, into = "First", sep = ",") %>%
+  mutate(labels = paste(First, "et al,", PY))
 
+# Joining them together, Ensuring the LABELS are the abbreviated citations
+z <- left_join(nodesinfo,b) %>%
+  dplyr::select(labels, everything())
+# Turning the data into a graph
+graph <- tbl_graph(nodes = z, edges = a, directed = T)
+
+# Graphing it
+ggraph(graph, "sphere") +
+  geom_edge_link(alpha=0.1) +
+  geom_node_point(aes(size = TC, color = Climate.Impact, shape = factor(Climate.Effect,  
+                                                              levels = c("Temperature", "None", "pollution", "SLR & Flooding", 
+                                                                         "Wildfires & Drought", "extreme weather events") ))) +
+  geom_node_text(aes(label = labels),repel=T) +
+  guides(size = "none", color = "none") +
+  labs(shape = "Climate Effect",
+       caption = "Color is the Climate Impact, size is the # of Citations") +
+  
+  theme_void() +
+  theme(legend.position="bottom") +
+  NULL
+
+# 
+# edges <- data.frame(t(sapply(from_to,c)))
+# edges <- as.data.frame(t(edges)) 
+# edges$V1 <- gsub("NA,", "", edges$V1)
+# edges$V1 <- gsub("NA", "", edges$V1)
+# edges$from <- rownames(edges)
+# edges$from <- gsub("X","",edges$from)
+# edges <- edges[,c(2,1)]
+# colnames(edges) <- c("from", "to")
+# edges <- edges %>% 
+#   separate_rows(to, sep = ",")
+# edges <- edges[edges$to != "",]
+# edges <- edges %>% 
+#   mutate(from = as.numeric(edges$from),
+#          to = as.numeric(edges$to))
+# 
+# routes_tidy <- tbl_graph(nodes = nodes, edges = edges, directed = TRUE)
+# 
+# ggraph(routes_tidy, layout = "circlepack") + 
+#   geom_node_point() +
+#   geom_edge_link(alpha = 0.8) + 
+#   scale_edge_width(range = c(0.2, 2)) +
+#   theme_graph()
+# 
+# 

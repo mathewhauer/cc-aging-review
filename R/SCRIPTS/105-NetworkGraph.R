@@ -105,7 +105,9 @@ graph <- tbl_graph(nodes = z, edges = a, directed = T)
 # Graphing it
 ggraph(graph, "sphere") +
   geom_edge_link(alpha=0.1) +
-  geom_node_point(aes(size = TC, color = Climate.Impact, shape = factor(Climate.Effect,  
+  geom_node_point(aes(size = TC, 
+                      #shape = Climate.Impact, 
+                      color = factor(Climate.Effect,  
                                                               levels = c("Temperature", "None", "pollution", "SLR & Flooding", 
                                                                          "Wildfires & Drought", "extreme weather events") ))) +
   geom_node_text(aes(label = labels),repel=T) +
@@ -114,7 +116,7 @@ ggraph(graph, "sphere") +
        caption = "Color is the Climate Impact, size is the # of Citations") +
   
   theme_void() +
-  theme(legend.position="bottom") +
+  # theme(legend.position="bottom") +
   NULL
 
 # 

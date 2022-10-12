@@ -9,6 +9,8 @@
 library(rcrossref)
 library(tidyverse)
 library(listviewer)
+library(tidygraph)
+library(ggraph)
 
 ## IMPORTING DATA
 documents_reviewed <- read.xlsx("../R/DATA-RAW/papers2.xlsx") %>%
@@ -17,11 +19,15 @@ documents_reviewed[177,3] <- "10.1016/S0140-6736(21)01209-5"   #DOI was missing 
 documents_reviewed <- documents_reviewed[documents_reviewed$DI != "10.23749/mdl.v109i3.6851",] #This DOI can't be found by crossref package THIS SHOULD BE NOTED IN METHODS OR NETWORK SETION
 
 ## Pulling metadata for references/citations
-reviewed_dois <- documents_reviewed$DI
-reviewed_articles_meta <- cr_works(dois = reviewed_dois) %>% 
-  purrr::pluck("data")
+### Saving the results to the hard drive and then reimporting because cr_works crawls the web and this saves time.
+# reviewed_dois <- documents_reviewed$DI
+# reviewed_articles_meta <- cr_works(dois = reviewed_dois) %>%
+#   purrr::pluck("data")
+# saveRDS(reviewed_articles_meta, "./R/DATA-PROCESSED/reviewed_articles_meta.rds")
+reviewed_articles_meta <- readRDS("./R/DATA-PROCESSED/reviewed_articles_meta.rds")
 
-## Creating objects to be referenced in network rangling
+
+## Creating objects to be referenced in network Wrangling
 ref_list <- list()
 ref_vector <- vector()
 from_to <- list()
@@ -31,16 +37,16 @@ nodes <- as.data.frame(reviewed_dois) %>%
 colnames(nodes) <- c("label", "id")
 
 ## Wrangling into network format
-for(i in 1:nrow(reviewed_articles_meta)){
-  ref_vector <- reviewed_articles_meta[[32]][[i]]$DOI
-  ref_list[[i]] <- list(ref_vector)
-  for(j in 1:length(reviewed_dois)){
-    cited_ids <- ifelse(reviewed_dois[[j]] %in% ref_list[[i]][[1]], 
+for(this.article in 1:nrow(reviewed_articles_meta)){
+  ref_vector <- reviewed_articles_meta[[32]][[this.article]]$DOI
+  ref_list[[this.article]] <- list(ref_vector)
+  for(this.citedart in 1:length(reviewed_dois)){
+    cited_ids <- ifelse(reviewed_dois[[this.citedart]] %in% ref_list[[this.article]][[1]], 
                         ifelse(is.na(cited_ids) == "logical(0)",
-                               paste(nodes$id[[j]]),
-                               paste(cited_ids, nodes$id[[j]], sep = ",")), 
+                               paste(nodes$id[[this.citedart]]),
+                               paste(cited_ids, nodes$id[[this.citedart]], sep = ",")), 
                         cited_ids)
-    from_to[[i]] <- list(cited_ids)
+    from_to[[this.article]] <- list(cited_ids)
   }
     cited_ids <- vector()
 }

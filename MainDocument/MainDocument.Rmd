@@ -7,15 +7,14 @@ blinded: 0
 
 authors: 
 - name: Mathew E. Hauer
-  thanks: The authors gratefully acknowledge ...
+  # thanks: The authors gratefully acknowledge ...
   affiliation: Department of Sociology, Florida State University
   
 - name: Kyle Rose
   affiliation: Department of Sociology, Florida State UniversityW
 
 keywords:
-- 3 to 6 keywords
-- that do not appear in the title
+- population aging; demography; climate impacts; mitigation; adaptation
 
 bibliography: bibliography.bib
 output: rticles::asa_article
@@ -39,7 +38,7 @@ read_chunk('../R/SCRIPTS/103-Map.R')
 ```
 
 ---
-abstract:  'In this systematic review, we analyze the literature through Web of Science’s SCI-Expanded containing the words “aging” or “aged” and “climate change” and receiving at least four citations per year since publication (n = `r num_articles_terms` articles). After discarding irrelevant articles (ie, “aging infrastructure”), the `r num_articles_reviewed` remaining articles overwhelmingly (`r percent((num_temp_mort + num_temp_morb)/num_articles_reviewed)`) fall into two categories: temperature/mortality (n= `r paste(num_temp_mort, percent(num_temp_mort/num_articles_reviewed), sep = "; ")`) and temperature/morbidity (n = `r paste(num_temp_morb, percent(num_temp_morb/num_articles_reviewed), sep = "; ")`). However, many other important climate topics related to aging remain underdeveloped. Notably, adaptation (n = 8; 6%), vulnerability (n = 5; 4%), emissions/mitigation (n = 4; 3%), drought and mortality (n = 1; 0.7%), food security (n = 1; 0.7%), and climate perceptions (n = 0) remain understudied. Furthermore, more than half of the studies were conducted in the United States (n = `r paste(num_US, percent(num_US/num_articles_reviewed), sep = "; ")`), China (n = `r paste(num_china, percent(num_china / num_articles_reviewed), sep = "; ")`), Globally (n = `r paste(num_global, percent(num_global/num_articles_reviewed), sep = "; ")`), and Australia (n = `r paste(num_aus, percent(num_aus/num_articles_reviewed), sep = "; ")`), suggesting a paucity of information in the Global South (n = 11) where climate impacts will be greatest. There were more studies specifically on Spain (n = 5) than specifically on the entire African continent (n = 4). Finally, 18 articles (13%) offered projections in some form, most to the middle of the century. Gerontologists and aging scientists should look beyond the relationship between heat and mortality to offer a more holistic view of aging and climate change. [Sentence about Geography]. Prospective analyses, as opposed to retrospective, could shed additional light on the link between aging and climate change.'
+abstract:  'In this systematic review, we analyze the literature through Web of Science’s SCI-Expanded containing the words “aging” or “aged” and “climate change” and receiving at least four citations per year since publication (n = `r num_articles_terms` articles). After discarding irrelevant articles (ie, “aging infrastructure”), the `r num_articles_reviewed` remaining articles overwhelmingly (`r percent((num_temp_mort + num_temp_morb)/num_articles_reviewed)`) fall into two categories: temperature/mortality (n= `r paste(num_temp_mort, percent(num_temp_mort/num_articles_reviewed), sep = "; ")`) and temperature/morbidity (n = `r paste(num_temp_morb, percent(num_temp_morb/num_articles_reviewed), sep = "; ")`). However, many other important climate topics related to aging remain underdeveloped. Notably, adaptation (n = 50; 29%), vulnerability (n = 27; 16%), emissions/mitigation (n = 19; 11%), climate perceptions (n = 13; 8%), drought (n = 4; 2%), and food security (n = 2; 1%) remain understudied. Furthermore, more than half of the studies were conducted in the United States (n = `r paste(num_US, percent(num_US/num_articles_reviewed), sep = "; ")`), China (n = `r paste(num_china, percent(num_china / num_articles_reviewed), sep = "; ")`), Globally (n = `r paste(num_global, percent(num_global/num_articles_reviewed), sep = "; ")`), and Australia (n = 11; 6%), suggesting a paucity of information in the Global South (n = 11) where climate impacts will be greatest. There were more studies specifically on Spain (n = 12) than specifically on the entire African continent (n = 5). Finally, 27 articles (16%) offered projections in some form, most to the middle of the century. Gerontologists and aging scientists should look beyond the relationship between heat and mortality to offer a more holistic view of aging and climate change. Prospective analyses, as opposed to retrospective, could shed additional light on the link between aging and climate change.'
 ---
 
 # Introduction
@@ -54,7 +53,8 @@ Nearly every climate impact is heightened by age due to the older people's socia
 
 Additionally, climate change and aging intersect in multiple ways, beyond just climate impacts. Older adults play important roles in the mitigation or reduction of carbon emissions [@oneill_global_2010; @buchs_who_2013]. Adaptation to climate impacts greatly vary among older populations [@huang_is_2011;@guo_high_2012] and perceptions of climate risks can serve as barriers to effective adaptation [@hansen_perceptions_2011;@abrahamson_perceptions_2008]. Yet, as we show in this article, most research concerning aging and climate change tends to focus on the impact of extreme temperatures on older populations. A more holistic view of the aging and climate change literature could shed light on the varied relationships between older adults and global environmental change.
 
-In this article, we conduct a systematic review of the literature surrounding climate change and aging. 
+In this article, we conduct a systematic review of the literature surrounding climate change and aging. For a full submission, we will investigate commonalities along mitigation, adaptation, and retrospective vs. prospective studies.
+
 
 
 # Methods and Materials
@@ -81,7 +81,7 @@ The underlying computer code and data that support the findings of this study ar
 
 # Results
 
-## Table: Key Points (Matt)
+<!-- ## Table: Key Points (Matt) -->
 
 ## Figure: Heat Map of Topics and Bar Chart (Kyle)
 Figure 2 illustrates the co-occurrences of climate effects and impacts. The overwhelming majority of articles in our sample concerned temperature as a climate effect (n = `r paste(num_temp)`). Some examples of climate effects which were classified as temperature include heat (n = 32), heatwaves (n = 16), daily temperature range (n = 9) and ambient temperature (n = 6).
@@ -95,18 +95,18 @@ There is also a small section of literature which concerns the effect of polluti
 There is a paucity of information on how droughts, extreme weather and sea-level rise will be impacting aging human populations. Cumulatively, `r paste(num_D_EW_SLR)` articles observed any of these effects of climate change.
 
 Importantly, very few articles observe the relationships between these climate effects and human behaviors, such as migration, economic activity and climate behaviors & policies (n = `r paste(num_behave)`). This gap is particularly pressing because it speaks to aging populations' abilities to respond to climate change. It is conceivable that aging populations may respond to sea-level rise with migration, urban heat islands with outdoor green spaces, extreme weather events with improved household infrastructure, or seasonal temperature variation with voting behavior. All of these examples demonstrate how climate effects can impact human behavior and consequently adaptive capacity, and all remain understudied.
-```{r heatmapcrosstab, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("Heatmap of Common Characteristics. \\label{fig-heatmap}")}
+```{r heatmapcrosstab, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("\\textbf{Heatmap of Common Characteristics.} Here we show the commonalities in the papers we reviewed. Most articles concerning Aging and Climate Change concern the relationship between temperature and mortality or temperature and morbidity. Very few studies touch on other climate impacts such as drought or Extreme weather. \\label{fig-heatmap}")}
 ```
 
-## Figure: Timeline of Papers and Citations (Matt)
+<!-- ## Figure: Timeline of Papers and Citations (Matt) -->
 
-## Figure: Social Network (Kyle)
+<!-- ## Figure: Social Network (Kyle) -->
 
 ## Figure: Map of the Literature (Matt)
 ```{r mapandtimelines, echo = FALSE, warning= FALSE, message = FALSE, fig.cap=paste("Map of study location frequency. \\label{fig-map}")}
 ```
 
 
-# Conclusion
+<!-- # Conclusion -->
 
-# Discussion
+<!-- # Discussion -->

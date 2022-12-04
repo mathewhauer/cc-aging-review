@@ -20,11 +20,11 @@ documents_reviewed <- documents_reviewed[documents_reviewed$DI != "10.23749/mdl.
 
 ## Pulling metadata for references/citations
 ### Saving the results to the hard drive and then reimporting because cr_works crawls the web and this saves time.
-# reviewed_dois <- documents_reviewed$DI
+reviewed_dois <- documents_reviewed$DI
 # reviewed_articles_meta <- cr_works(dois = reviewed_dois) %>%
 #   purrr::pluck("data")
 # saveRDS(reviewed_articles_meta, "./R/DATA-PROCESSED/reviewed_articles_meta.rds")
-reviewed_articles_meta <- readRDS("./R/DATA-PROCESSED/reviewed_articles_meta.rds")
+reviewed_articles_meta <- readRDS("../R/DATA-PROCESSED/reviewed_articles_meta.rds")
 
 
 ## Creating objects to be referenced in network Wrangling
@@ -92,9 +92,9 @@ b <- a %>%
   rename(origin = destination) %>%
   top_n(5, count) %>%
   left_join(., nodesinfo) %>%
-  dplyr::select(origin, AU, PY, count) %>%
-  separate(AU, into = "First", sep = ",") %>%
-  mutate(labels = paste(First, "et al,", PY))
+  dplyr::select(origin, Authors, PY, count) %>%
+  separate(Authors, into = "First", sep = ",") %>%
+  mutate(labels = paste(First, "et al.,", PY))
 
 # Joining them together, Ensuring the LABELS are the abbreviated citations
 z <- left_join(nodesinfo,b) %>%
@@ -103,14 +103,14 @@ z <- left_join(nodesinfo,b) %>%
 graph <- tbl_graph(nodes = z, edges = a, directed = T)
 
 # Graphing it
-ggraph(graph, "sphere") +
+ggraph(graph, "circlepack") +
   geom_edge_link(alpha=0.1) +
   geom_node_point(aes(size = TC, 
-                      #shape = Climate.Impact, 
-                      color = factor(Climate.Effect,  
+                      color = Climate.Impact, 
+                      shape = factor(Climate.Effect,  
                                                               levels = c("Temperature", "None", "pollution", "SLR & Flooding", 
                                                                          "Wildfires & Drought", "extreme weather events") ))) +
-  geom_node_text(aes(label = labels),repel=T) +
+  # geom_node_text(aes(label = labels),repel=T) +
   guides(size = "none", color = "none") +
   labs(shape = "Climate Effect",
        caption = "Color is the Climate Impact, size is the # of Citations") +
@@ -119,7 +119,50 @@ ggraph(graph, "sphere") +
   # theme(legend.position="bottom") +
   NULL
 
-# 
+
+## Tabling count of citations within and between climate effects
+effect_cites <- data.frame()
+for(this.effect in unique(as.character(z$Climate.Effect))){
+  effect <- as.character(this.effect)
+  within_df <- a[a$origin %in% z[z$Climate.Effect == this.effect,]$id & a$destination %in% z[z$Climate.Effect == this.effect,]$id,]
+  edges_within <- nrow(within_df)
+  count_within <- nrow(z[z$origin %in% within_df$origin,])
+  percent_within <- percent(nrow(z[z$origin %in% within_df$origin,]) / nrow(z[z$Climate.Effect == this.effect,]))
+  between_df <- a[a$origin %in% z[z$Climate.Effect == this.effect,]$id & a$destination %in% z[z$Climate.Effect != this.effect,]$id,]
+  edges_between <- nrow(between_df)
+  count_between <- nrow(z[z$origin %in% between_df$origin,])
+  percent_between <- percent(nrow(z[z$origin %in% between_df$origin,]) / nrow(z[z$Climate.Effect == this.effect,]))
+  temp_vector <- c(effect, percent_within, percent_between, count_within, count_between, edges_within, edges_between)
+  effect_cites <- rbind(effect_cites,temp_vector)
+}
+colnames(effect_cites) <-  c("effect", "percent citing within", "percent citing between", "count citing within", "count citing between", "count edges within", "count edges between")
+
+# ## EXAMPLE OF HOW TO INTERPRET effect_cites DATAFRAME CREATED ABOVE:
+# "117 (87%) of the articles in our sample which concerned the effect of temperature 
+# cited other articles in our sample concerning the effect of temperature a total of
+# 443 times. This contrasts articles in our sample that concerned the effect of pollution,
+# 4 (33%) of which cited other articles in our sample concerning the effect of pollution 
+# a total of 4 times"
+
+# ## Tabling count of citations within and between climate impacts DONT DELETE
+# impact_cites <- data.frame()
+# for(this.effect in unique(as.character(z$Climate.Effect))){
+#   effect <- as.character(this.effect)
+#   within_df <- a[a$origin %in% z[z$Climate.Effect == this.effect,]$id & a$destination %in% z[z$Climate.Effect == this.effect,]$id,]
+#   edges_within <- nrow(within_df)
+#   count_within <- nrow(z[z$origin %in% within_df$origin,])
+#   percent_within <- percent(nrow(z[z$origin %in% within_df$origin,]) / nrow(z[z$Climate.Effect == this.effect,]))
+#   between_df <- a[a$origin %in% z[z$Climate.Effect == this.effect,]$id & a$destination %in% z[z$Climate.Effect != this.effect,]$id,]
+#   edges_between <- nrow(between_df)
+#   count_between <- nrow(z[z$origin %in% between_df$origin,])
+#   percent_between <- percent(nrow(z[z$origin %in% between_df$origin,]) / nrow(z[z$Climate.Effect == this.effect,]))
+#   temp_vector <- c(effect, percent_within, percent_between, count_within, count_between, edges_within, edges_between)
+#   impact_cites <- rbind(impact_cites,temp_vector)
+# }
+# colnames(impact_cites) <-  c("effect", "percent citing within", "percent citing between", "count citing within", "count citing between", "count edges within", "count edges between")
+
+
+#### EVERYTHING BELOW THIS LINE CAN BE DELETED
 # edges <- data.frame(t(sapply(from_to,c)))
 # edges <- as.data.frame(t(edges)) 
 # edges$V1 <- gsub("NA,", "", edges$V1)

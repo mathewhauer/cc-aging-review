@@ -21,19 +21,28 @@ a <- ggplot(data=py, aes(x = PY, y = count)) +
   geom_point() +
   geom_smooth() + 
   theme_bw() +
+  labs(title = "Articles",
+       x = "Publication Year",
+       y = "Count") +
   NULL
 
 b <- ggplot(data=TC, aes(x = PY, y = cites)) +
   geom_point() +
   geom_smooth() + 
   theme_bw() +
+  labs(title = "Cumulative Cites for Articles Published in Each Year",
+       x = "Publication Year",
+       y = "Cumlative\n Cites") +
   NULL
 
 c <- ggplot(data=citesyear, aes(x = PY, y = cites)) +
   geom_point() +
   geom_smooth() + 
   theme_bw() +
+  labs(title = "Citations Per Year",
+       x = "Publication Year",
+       y = "Average cites\n per year") +
   NULL
 
-plot_grid(a,b,c, ncol=1)
+plot_grid(a,b,c, ncol=1, labels = c("a", "b", "c"))
 

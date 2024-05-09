@@ -2,7 +2,35 @@
 ## @knitr heatmapcrosstab
 
 ## Importing Data
-documents_split <- read.xlsx("../R/DATA-RAW/categorized effects impacts.xlsx")
+documents_split <- read.xlsx("../R/DATA-RAW/papers2.xlsx")  %>%
+  filter(Summary != "N/A") %>%
+  mutate(
+    Collapsed.Effect = case_when(
+      Climate.Effect %in% c("SLR", "Flooding") ~ "SLR & Flooding",
+      Climate.Effect %in% c("extreme weather events", "wildfires") ~ "Extreme Weather",
+      Climate.Effect == "drought" ~ "Drought",
+      Climate.Effect == "pollution" ~ "Pollution",
+      Climate.Effect == "temperature" ~ "Temperature",
+      TRUE ~ Climate.Effect),
+    Collapsed.Impact = case_when(
+      Climate.Impact %in% c("mortality", "long-term survival", "mortality, morbidity", "mortality, economic",
+                            "hospital admissions, mortality") ~ "Mortality",
+      Climate.Impact %in% c("Energy Use", "urban climate change policies",
+                            "home protection",
+                            "emissions") ~ "Climate Behaviors & Policies",
+      Climate.Impact %in% c("Ambulance attendance", "emotional wellbeing",
+                            "hospital admissions", 
+                            "mental disorder hospital admissions",
+                            "morbidity", "Sleep", "sleep", "cardiac health",
+                            "morbidity, mortality") ~ "Morbidity",
+      Climate.Impact %in% c("econnomic") ~ "Economy",
+      Climate.Impact %in% c("migration") ~ "Migration",
+      Climate.Impact %in% c("No") ~ "None",
+      Climate.Impact == "Food Security" ~ "Food Security",
+      Climate.Impact == "hospital admissions, economic" ~ "Economy",
+      Climate.Impact == "leisure activities" ~ "Leisure Activities",
+      
+      TRUE ~ Climate.Impact))
 documents_split <- documents_split[,c(30,31)]
 
 ## Create df for crosstab
